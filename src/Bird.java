@@ -1,32 +1,34 @@
 import java.awt.Color;
-import java.awt.Polygon;
-import java.util.ArrayList;
+import java.awt.Graphics;
 
 public class Bird extends Actor {
   public Bird(Cell inLoc) {
     loc = inLoc;
     color = Color.GREEN;
+  }
 
-    polygons = new ArrayList<>();
+  @Override
+  public void paint(Graphics g) {
+    // Body
+    g.setColor(color);
+    g.fillOval(loc.x + 10, loc.y + 10, 15, 15);
 
-    Polygon wing1 = new Polygon();
-    wing1.addPoint(loc.x + 5, loc.y + 5);
-    wing1.addPoint(loc.x + 15, loc.y + 17);
-    wing1.addPoint(loc.x + 5, loc.y + 17);
+    // Wings
+    g.setColor(color.darker());
+    g.fillOval(loc.x + 5, loc.y + 12, 8, 10);
+    g.fillOval(loc.x + 22, loc.y + 12, 8, 10);
 
-    Polygon wing2 = new Polygon();
-    wing2.addPoint(loc.x + 30, loc.y + 5);
-    wing2.addPoint(loc.x + 20, loc.y + 17);
-    wing2.addPoint(loc.x + 30, loc.y + 17);
+    // Eye
+    g.setColor(Color.WHITE);
+    g.fillOval(loc.x + 15, loc.y + 12, 4, 4);
+    g.setColor(Color.BLACK);
+    g.fillOval(loc.x + 16, loc.y + 13, 2, 2);
 
-    Polygon body = new Polygon();
-    body.addPoint(loc.x + 15, loc.y + 10);
-    body.addPoint(loc.x + 20, loc.y + 10);
-    body.addPoint(loc.x + 20, loc.y + 25);
-    body.addPoint(loc.x + 15, loc.y + 25);
-
-    polygons.add(wing1);
-    polygons.add(wing2);
-    polygons.add(body);
+    // Beak
+    g.setColor(Color.ORANGE);
+    g.fillPolygon(
+      new int[]{loc.x + 20, loc.x + 25, loc.x + 20},
+      new int[]{loc.y + 18, loc.y + 20, loc.y + 22}, 3
+    );
   }
 }

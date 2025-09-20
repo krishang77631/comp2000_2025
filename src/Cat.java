@@ -1,31 +1,38 @@
 import java.awt.Color;
-import java.awt.Polygon;
-import java.util.ArrayList;
+import java.awt.Graphics;
 
 public class Cat extends Actor {
   public Cat(Cell inLoc) {
     loc = inLoc;
-    color = Color.BLUE;
+    color = Color.ORANGE;
+  }
 
-    polygons = new ArrayList<>();
+  @Override
+  public void paint(Graphics g) {
+    // Head
+    g.setColor(color);
+    g.fillOval(loc.x + 5, loc.y + 5, loc.width - 10, loc.height - 10);
 
-    Polygon ear1 = new Polygon();
-    ear1.addPoint(loc.x + 11, loc.y + 5);
-    ear1.addPoint(loc.x + 15, loc.y + 15);
-    ear1.addPoint(loc.x + 7, loc.y + 15);
+    // Ears
+    g.setColor(color.darker());
+    int[] x1 = {loc.x + 8, loc.x + 15, loc.x + 12};
+    int[] y1 = {loc.y + 15, loc.y + 15, loc.y + 3};
+    g.fillPolygon(x1, y1, 3);
 
-    Polygon ear2 = new Polygon();
-    ear2.addPoint(loc.x + 22, loc.y + 5);
-    ear2.addPoint(loc.x + 26, loc.y + 15);
-    ear2.addPoint(loc.x + 18, loc.y + 15);
+    int[] x2 = {loc.x + 20, loc.x + 27, loc.x + 23};
+    int[] y2 = {loc.y + 15, loc.y + 15, loc.y + 3};
+    g.fillPolygon(x2, y2, 3);
 
-    Polygon face = new Polygon();
-    face.addPoint(loc.x + 5, loc.y + 15);
-    face.addPoint(loc.x + 29, loc.y + 15);
-    face.addPoint(loc.x + 17, loc.y + 30);
+    // Eyes
+    g.setColor(Color.WHITE);
+    g.fillOval(loc.x + 12, loc.y + 15, 5, 5);
+    g.fillOval(loc.x + 20, loc.y + 15, 5, 5);
+    g.setColor(Color.BLACK);
+    g.fillOval(loc.x + 14, loc.y + 17, 2, 2);
+    g.fillOval(loc.x + 22, loc.y + 17, 2, 2);
 
-    polygons.add(ear1);
-    polygons.add(ear2);
-    polygons.add(face);
+    // Nose
+    g.setColor(Color.PINK);
+    g.fillOval(loc.x + 17, loc.y + 22, 4, 4);
   }
 }
