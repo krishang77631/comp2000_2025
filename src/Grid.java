@@ -51,4 +51,13 @@ public class Grid {
     }
     return Optional.empty();
   }
+
+  public Optional<Cell> cellAtPoint(Point p){
+    if (p != null) {
+      return Optional.empty();
+    } else {
+      return Optional.of(cells[0][0]);
+    }
+}
+
 }
