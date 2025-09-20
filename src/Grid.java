@@ -1,4 +1,3 @@
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.util.Optional;
@@ -9,15 +8,13 @@ public class Grid {
   public Grid() {
     for (int i = 0; i < cells.length; i++) {
       for (int j = 0; j < cells[i].length; j++) {
-        int rand = (int)(Math.random() * 4); // pick 0–3 for terrain
-        if (rand == 0) {
-          cells[i][j] = new GrassCell(colToLabel(i), j, 10 + Cell.size * i, 10 + Cell.size * j);
-        } else if (rand == 1) {
-          cells[i][j] = new WaterCell(colToLabel(i), j, 10 + Cell.size * i, 10 + Cell.size * j);
-        } else if (rand == 2) {
-          cells[i][j] = new DirtCell(colToLabel(i), j, 10 + Cell.size * i, 10 + Cell.size * j);
-        } else {
-          cells[i][j] = new StoneCell(colToLabel(i), j, 10 + Cell.size * i, 10 + Cell.size * j);
+        // Pick terrain type in a repeating pattern (you can change this to random if you like)
+        int pick = (i + j) % 4;
+        switch (pick) {
+          case 0 -> cells[i][j] = new GrassCell(colToLabel(i), j, 10 + Cell.size * i, 10 + Cell.size * j);
+          case 1 -> cells[i][j] = new WaterCell(colToLabel(i), j, 10 + Cell.size * i, 10 + Cell.size * j);
+          case 2 -> cells[i][j] = new DirtCell(colToLabel(i), j, 10 + Cell.size * i, 10 + Cell.size * j);
+          case 3 -> cells[i][j] = new StoneCell(colToLabel(i), j, 10 + Cell.size * i, 10 + Cell.size * j);
         }
       }
     }
@@ -36,17 +33,6 @@ public class Grid {
       for (int j = 0; j < cells[i].length; j++) {
         cells[i][j].paint(g, mousePos);
       }
-    }
-
-    // Thick outer border around the whole grid
-    int gridWidth = cells.length * Cell.size;
-    int gridHeight = cells[0].length * Cell.size;
-    int startX = cells[0][0].x;
-    int startY = cells[0][0].y;
-
-    g.setColor(Color.BLACK);
-    for (int i = 0; i < 3; i++) {
-      g.drawRect(startX - i, startY - i, gridWidth + (i * 2), gridHeight + (i * 2));
     }
   }
 

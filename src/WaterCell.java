@@ -7,6 +7,6 @@ public class WaterCell extends Cell {
 
   @Override
   public Color getBaseColor() {
-    return new Color(30, 144, 255); // blue
+    return new Color(30, 144, 255); // dodger blue
   }
 }

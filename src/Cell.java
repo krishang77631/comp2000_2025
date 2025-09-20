@@ -4,7 +4,7 @@ import java.awt.Point;
 import java.awt.Rectangle;
 
 public abstract class Cell extends Rectangle {
-  static int size = 32;
+  static int size = 35;
   char col;
   int row;
 
@@ -14,25 +14,20 @@ public abstract class Cell extends Rectangle {
     row = inRow;
   }
 
-  // Each terrain decides its base color
+  // Every subclass must define its base color
   public abstract Color getBaseColor();
 
   public void paint(Graphics g, Point mousePos) {
-    g.setColor(getBaseColor());
-
-    // Darker shade if mouse is hovering
     if (contains(mousePos)) {
-      g.setColor(getBaseColor().darker());
+      g.setColor(Color.LIGHT_GRAY); // hover highlight
+    } else {
+      g.setColor(getBaseColor());   // use subclass color
     }
-
     g.fillRect(x, y, size, size);
-
-    // Grid border
-    g.setColor(Color.GRAY);
+    g.setColor(Color.BLACK);
     g.drawRect(x, y, size, size);
   }
 
-  @Override
   public boolean contains(Point p) {
     if (p != null) {
       return super.contains(p);
