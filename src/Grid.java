@@ -1,14 +1,20 @@
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.util.Optional;
 
 public class Grid {
   Cell[][] cells = new Cell[20][20];
-  
+
   public Grid() {
     for (int i = 0; i < cells.length; i++) {
       for (int j = 0; j < cells[i].length; j++) {
-        cells[i][j] = new Cell(colToLabel(i), j, 10 + Cell.size * i, 10 + Cell.size * j);
+        cells[i][j] = new Cell(
+          colToLabel(i),
+          j,
+          10 + Cell.size * i,
+          10 + Cell.size * j
+        );
       }
     }
   }
@@ -26,6 +32,22 @@ public class Grid {
       for (int j = 0; j < cells[i].length; j++) {
         cells[i][j].paint(g, mousePos);
       }
+    }
+
+    // === Draw a bold border around the entire grid ===
+    int gridWidth = cells.length * Cell.size;
+    int gridHeight = cells[0].length * Cell.size;
+    int startX = cells[0][0].x;
+    int startY = cells[0][0].y;
+
+    g.setColor(Color.BLACK);
+    for (int i = 0; i < 3; i++) { // 3px thick border
+      g.drawRect(
+        startX - i,
+        startY - i,
+        gridWidth + (i * 2),
+        gridHeight + (i * 2)
+      );
     }
   }
 

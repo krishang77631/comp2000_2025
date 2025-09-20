@@ -4,7 +4,7 @@ import java.awt.Point;
 import java.awt.Rectangle;
 
 public class Cell extends Rectangle {
-  static int size = 30;
+  static int size = 30; // fits better in the window
   char col;
   int row;
 
@@ -15,28 +15,28 @@ public class Cell extends Rectangle {
   }
 
   public void paint(Graphics g, Point mousePos) {
-  // Background color (checkerboard)
-  if ((row + col) % 2 == 0) {
-    g.setColor(new Color(230, 230, 230)); // light gray
-  } else {
-    g.setColor(new Color(255, 255, 255)); // white
+    // Checkerboard background
+    if ((row + col) % 2 == 0) {
+      g.setColor(new Color(240, 240, 240)); // light gray
+    } else {
+      g.setColor(new Color(220, 220, 220)); // darker gray
+    }
+
+    // Highlight if mouse is over this cell
+    if (contains(mousePos)) {
+      g.setColor(new Color(180, 200, 255)); // light blue highlight
+    }
+
+    g.fillRect(x, y, size, size);
+
+    // Thin border for each cell
+    g.setColor(Color.GRAY);
+    g.drawRect(x, y, size, size);
   }
 
-  // Highlight if mouse is over
-  if (contains(mousePos)) {
-    g.setColor(new Color(200, 200, 255));
-  }
-
-  g.fillRect(x, y, size, size);
-
-  // Border
-  g.setColor(Color.GRAY);
-  g.drawRect(x, y, size, size);
-}
-
-
+  @Override
   public boolean contains(Point p) {
-    if(p != null) {
+    if (p != null) {
       return super.contains(p);
     } else {
       return false;
