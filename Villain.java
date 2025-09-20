@@ -4,15 +4,27 @@ public abstract class Villain extends Actor {
   protected String alias;
   protected int health;
 
-  public Villain(String alias, Color color, Cell startLoc) {
+  public Villain(String alias, Color color, Cell inLoc) {
     this.alias = alias;
     this.color = color;
-    this.loc = startLoc;
-    this.health = 80; // villains a bit weaker
+    this.loc = inLoc;
+    this.health = 80; // default HP for villains
   }
 
-  public void takeDamage(int dmg) { this.health -= dmg; }
-  public boolean isAlive() { return health > 0; }
-  public int getHealth() { return health; }
-  public String getAlias() { return alias; }
+  public String getAlias() {
+    return alias;
+  }
+
+  public int getHealth() {
+    return health;
+  }
+
+  public void takeDamage(int dmg) {
+    health -= dmg;
+    if (health < 0) health = 0;
+  }
+
+  public boolean isAlive() {
+    return health > 0;
+  }
 }

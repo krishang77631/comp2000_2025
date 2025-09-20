@@ -4,30 +4,33 @@ import java.awt.Graphics;
 public class Dog extends Actor {
   public Dog(Cell inLoc) {
     loc = inLoc;
-    color = new Color(139, 69, 19); // brown
+    color = new Color(160, 82, 45); // brown
   }
 
   @Override
   public void paint(Graphics g) {
-    // Head
+    // Face
     g.setColor(color);
-    g.fillOval(loc.x + 5, loc.y + 5, loc.width - 10, loc.height - 10);
+    g.fillOval(loc.x + 6, loc.y + 6, 20, 20);
 
     // Ears
-    g.setColor(color.darker());
-    g.fillOval(loc.x, loc.y + 8, 8, 15);
-    g.fillOval(loc.x + 25, loc.y + 8, 8, 15);
+    g.fillOval(loc.x, loc.y + 8, 8, 12);
+    g.fillOval(loc.x + 24, loc.y + 8, 8, 12);
 
     // Eyes
     g.setColor(Color.WHITE);
-    g.fillOval(loc.x + 12, loc.y + 15, 5, 5);
-    g.fillOval(loc.x + 20, loc.y + 15, 5, 5);
+    g.fillOval(loc.x + 10, loc.y + 12, 5, 5);
+    g.fillOval(loc.x + 18, loc.y + 12, 5, 5);
     g.setColor(Color.BLACK);
-    g.fillOval(loc.x + 14, loc.y + 17, 2, 2);
-    g.fillOval(loc.x + 22, loc.y + 17, 2, 2);
+    g.fillOval(loc.x + 12, loc.y + 14, 2, 2);
+    g.fillOval(loc.x + 20, loc.y + 14, 2, 2);
 
-    // Tongue
-    g.setColor(Color.PINK);
-    g.fillOval(loc.x + 16, loc.y + 28, 6, 6);
+    // Nose
+    g.setColor(Color.BLACK);
+    g.fillOval(loc.x + 15, loc.y + 20, 5, 5);
+
+    // Outline
+    g.setColor(Color.BLACK);
+    g.drawOval(loc.x + 6, loc.y + 6, 20, 20);
   }
 }

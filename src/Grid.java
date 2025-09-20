@@ -9,12 +9,16 @@ public class Grid {
   public Grid() {
     for (int i = 0; i < cells.length; i++) {
       for (int j = 0; j < cells[i].length; j++) {
-        cells[i][j] = new Cell(
-          colToLabel(i),
-          j,
-          10 + Cell.size * i,
-          10 + Cell.size * j
-        );
+        int rand = (int)(Math.random() * 4); // pick 0–3 for terrain
+        if (rand == 0) {
+          cells[i][j] = new GrassCell(colToLabel(i), j, 10 + Cell.size * i, 10 + Cell.size * j);
+        } else if (rand == 1) {
+          cells[i][j] = new WaterCell(colToLabel(i), j, 10 + Cell.size * i, 10 + Cell.size * j);
+        } else if (rand == 2) {
+          cells[i][j] = new DirtCell(colToLabel(i), j, 10 + Cell.size * i, 10 + Cell.size * j);
+        } else {
+          cells[i][j] = new StoneCell(colToLabel(i), j, 10 + Cell.size * i, 10 + Cell.size * j);
+        }
       }
     }
   }
@@ -34,20 +38,15 @@ public class Grid {
       }
     }
 
-    // === Draw a bold border around the entire grid ===
+    // Thick outer border around the whole grid
     int gridWidth = cells.length * Cell.size;
     int gridHeight = cells[0].length * Cell.size;
     int startX = cells[0][0].x;
     int startY = cells[0][0].y;
 
     g.setColor(Color.BLACK);
-    for (int i = 0; i < 3; i++) { // 3px thick border
-      g.drawRect(
-        startX - i,
-        startY - i,
-        gridWidth + (i * 2),
-        gridHeight + (i * 2)
-      );
+    for (int i = 0; i < 3; i++) {
+      g.drawRect(startX - i, startY - i, gridWidth + (i * 2), gridHeight + (i * 2));
     }
   }
 

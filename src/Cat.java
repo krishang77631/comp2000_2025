@@ -9,30 +9,31 @@ public class Cat extends Actor {
 
   @Override
   public void paint(Graphics g) {
-    // Head
+    // Face
     g.setColor(color);
-    g.fillOval(loc.x + 5, loc.y + 5, loc.width - 10, loc.height - 10);
+    g.fillOval(loc.x + 6, loc.y + 6, 20, 20);
 
     // Ears
-    g.setColor(color.darker());
-    int[] x1 = {loc.x + 8, loc.x + 15, loc.x + 12};
-    int[] y1 = {loc.y + 15, loc.y + 15, loc.y + 3};
-    g.fillPolygon(x1, y1, 3);
-
-    int[] x2 = {loc.x + 20, loc.x + 27, loc.x + 23};
-    int[] y2 = {loc.y + 15, loc.y + 15, loc.y + 3};
-    g.fillPolygon(x2, y2, 3);
+    g.setColor(color);
+    g.fillPolygon(new int[]{loc.x + 8, loc.x + 14, loc.x + 10},
+                  new int[]{loc.y + 6, loc.y, loc.y + 6}, 3);
+    g.fillPolygon(new int[]{loc.x + 18, loc.x + 24, loc.x + 20},
+                  new int[]{loc.y + 6, loc.y, loc.y + 6}, 3);
 
     // Eyes
     g.setColor(Color.WHITE);
-    g.fillOval(loc.x + 12, loc.y + 15, 5, 5);
-    g.fillOval(loc.x + 20, loc.y + 15, 5, 5);
+    g.fillOval(loc.x + 10, loc.y + 12, 5, 5);
+    g.fillOval(loc.x + 18, loc.y + 12, 5, 5);
     g.setColor(Color.BLACK);
-    g.fillOval(loc.x + 14, loc.y + 17, 2, 2);
-    g.fillOval(loc.x + 22, loc.y + 17, 2, 2);
+    g.fillOval(loc.x + 12, loc.y + 14, 2, 2);
+    g.fillOval(loc.x + 20, loc.y + 14, 2, 2);
 
     // Nose
     g.setColor(Color.PINK);
-    g.fillOval(loc.x + 17, loc.y + 22, 4, 4);
+    g.fillOval(loc.x + 15, loc.y + 18, 4, 4);
+
+    // Outline
+    g.setColor(Color.BLACK);
+    g.drawOval(loc.x + 6, loc.y + 6, 20, 20);
   }
 }
